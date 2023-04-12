@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import connectDB from "./db.js";
 import aboutUsRoutes from "./Routes/aboutUsRoute.js";
-const routes = require("./Routes");
 
 dotenv.config();
 await connectDB();
@@ -12,7 +11,6 @@ const app = new express();
 if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
-app.use("/", routes);
 app.use("/aboutUs", aboutUsRoutes);
 
 app.use(express.json());
