@@ -1,4 +1,4 @@
-import Model from "../Model/Admin_Model.js"
+import Model from "../Models/Admin_Model.js"
 import bcrypt from "bcrypt";
 import mongoose  from "mongoose";
 import jwt from 'jsonwebtoken'
@@ -6,7 +6,7 @@ const handleErrors = (err) => {
   console.log(err.message);
   let errors = { email:'', password:''};
 
-  if (err.message.includes('User validation failed')) {
+  if (err.message.includes('Admin validation failed')) {
     Object.values(err.errors).forEach(({ properties }) => {
       errors[properties.path] = properties.message;
     });

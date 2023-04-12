@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import controller from '../Controller/Admin_Controller.js'
+import controller from '../Controllers/Admin_Controller.js'
 import VerifyToken from '../middleware/auth.js'
 router.get('/',VerifyToken,controller.getAll);
 router.get('/:id',VerifyToken,controller.get);
