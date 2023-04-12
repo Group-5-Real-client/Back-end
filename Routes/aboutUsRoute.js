@@ -1,16 +1,10 @@
 import express from "express";
+import aboutUsControllers from "../Controllers/aboutUsController.js";
 const router = express.Router();
-const {
-    getAllAboutUs,
-    getAboutUsById,
-    addAboutUs,
-    editAboutUs,
-} = require("./aboutUsController");
 
-// Define routes for controllers
-router.get("/", getAllAboutUs);
-router.get("/:id", getAboutUsById);
-router.post("/", addAboutUs);
-router.put("/:id", editAboutUs);
+router.get("/", aboutUsControllers.getAllAboutUs);
+router.get("/:id", aboutUsControllers.getAboutUsById);
+router.post("/", aboutUsControllers.addAboutUs);
+router.put("/:id", aboutUsControllers.editAboutUs);
 
-module.exports = router;
+export default router;

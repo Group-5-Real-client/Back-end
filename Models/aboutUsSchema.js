@@ -1,16 +1,22 @@
 import mongoose from "mongoose";
+const { Schema, model } = mongoose;
 
-const aboutUsSchema = new mongoose.Schema({
-    description: {
-        type: String,
-        required: true,
+const aboutUsSchema = new Schema(
+    {
+        description: {
+            type: String,
+            required: true,
+        },
+        file: {
+            type: String,
+        },
     },
-    image: {
-        type: String,
-        required: true,
-    },
-});
+    {
+        collection: "aboutUs",
+        timestamps: true,
+    }
+);
 
-const AboutUs = mongoose.model("AboutUs", aboutUsSchema);
+const AboutUs = model("AboutUs", aboutUsSchema);
 
-module.exports = AboutUs;
+export default AboutUs;
