@@ -27,37 +27,30 @@ const getAboutUsById = async (req, res) => {
 
 // ADD aboutUs
 const addAboutUs = async (req, res) => {
+    const { description, image } = req.body;
     try {
-        const { description } = req.body;
-
-        const addNewAboutUs = await AboutUs.create({
+        const newAboutUs = new AboutUs({
             description,
+            image,
         });
-
-        if (!addNewAboutUs) {
-            return res.status(404).json({ message: "Cart not found" });
-        }
-        res.status(200).send({
-            success: true,
-            message: "Add Successfully",
-            data: addNewAboutUs,
-        });
+        await newAboutUs.save();
+        res.json(newAboutUs);
     } catch (err) {
-        res.status(500).json({ message: err.message });
-        console.log(err);
+        console.error(err);
+        res.status(500).json({ message: "Server Error" });
     }
 };
 
 // EDIT aboutUs
 const editAboutUs = async (req, res) => {
-    const { description, file } = req.body;
+    const { description, image } = req.body;
     try {
         let aboutUs = await AboutUs.findById(req.params.id);
         if (!aboutUs) {
             return res.status(404).json({ message: "About Us not found" });
         }
         aboutUs.description = description;
-        aboutUs.file = file;
+        aboutUs.image = image;
         await aboutUs.save();
         res.json(aboutUs);
     } catch (err) {

@@ -7,7 +7,7 @@ const aboutUsSchema = new Schema(
             type: String,
             required: true,
         },
-        file: {
+        image: {
             type: String,
         },
     },
@@ -18,5 +18,4 @@ const aboutUsSchema = new Schema(
 );
 
 const AboutUs = model("AboutUs", aboutUsSchema);
-
 export default AboutUs;
