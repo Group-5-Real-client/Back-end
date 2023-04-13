@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import connectDB from "./db.js";
 import aboutUsRoutes from "./Routes/aboutUsRoute.js";
+import bodyParser from "body-parser";
 
 await connectDB();
 const PORT = process.env.PORT || 5000;
@@ -14,6 +15,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use(express.json());
+app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
     res.send("API is running ...");
