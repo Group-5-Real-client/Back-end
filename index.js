@@ -7,6 +7,7 @@ import UserRouter from './Routes/User_Routes.js'
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import productRouters from "./Routes/product.js";
+
 dotenv.config()
  await connectDB()
 const PORT = process.env.PORT || 5000;
@@ -22,6 +23,8 @@ app.get('/',(req,res)=>{
 })
 app.use("/api/admin",AdminRouter)
 app.use("/api/user",UserRouter)
+app.use("/api/form",FormRouter)
+app.use("/api/category",CategoryRouter)
 app.use("/api/product",productRouters);
 
 
