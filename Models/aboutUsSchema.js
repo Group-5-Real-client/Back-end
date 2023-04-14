@@ -9,6 +9,7 @@ const aboutUsSchema = new Schema(
         },
         image: {
             type: String,
+            required: true,
         },
     },
     {

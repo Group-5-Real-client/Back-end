@@ -27,18 +27,23 @@ const getAboutUsById = async (req, res) => {
 
 // ADD aboutUs
 const addAboutUs = async (req, res) => {
-    const { description, image } = req.body;
     try {
-        const newAboutUs = new AboutUs({
-            description,
-            image,
+        console.log(req.body)
+        const newPoster = new AboutUs({
+          image: req.body.image,
+          description: req.body.description
         });
-        await newAboutUs.save();
-        res.json(newAboutUs);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Server Error" });
-    }
+        await newPoster.save().then((response) => {
+            if (response){
+            res.send({
+              status: 200,
+              message: "about saved successfuly",
+              response,
+            });}
+          });
+      } catch (err) {
+        return res.status(403).send({ status: 403, err:err.message });
+      }
 };
 
 // EDIT aboutUs

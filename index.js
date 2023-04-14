@@ -11,6 +11,7 @@ await connectDB();
 const PORT = process.env.PORT || 5000;
 const app = express();
 app.use(express.json());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 if (process.env.NODE_ENV === "development") {
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/aboutUs", aboutUsRoutes);
+app.use("/uploads", express.static("./uploads"));
 
 app.listen(
     PORT,
