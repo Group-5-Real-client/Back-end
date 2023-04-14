@@ -2,6 +2,11 @@ import express from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import connectDB from "./db.js";
+import AdminRouter from "./Routes/Admin_Routes.js";
+import UserRouter from "./Routes/User_Routes.js";
+import CategoryRouter from "./Routes/Categories_Routes.js";
+import FormRouter from "./Routes/ContactUs_Routes.js";
+import productRouters from "./Routes/product.js";
 import aboutUsRoutes from "./Routes/aboutUsRoute.js";
 import bodyParser from "body-parser";
 
@@ -23,6 +28,11 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/aboutUs", aboutUsRoutes);
+app.use("/api/admin", AdminRouter);
+app.use("/api/user", UserRouter);
+app.use("/api/form", FormRouter);
+app.use("/api/category", CategoryRouter);
+app.use("/api/product", productRouters);
 app.use("/uploads", express.static("./uploads"));
 
 app.listen(
