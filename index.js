@@ -7,6 +7,7 @@ import UserRouter from "./Routes/User_Routes.js";
 import CategoryRouter from "./Routes/Categories_Routes.js";
 import FormRouter from "./Routes/ContactUs_Routes.js";
 import productRouters from "./Routes/product.js";
+import ReviewRouter from './Routes/Review_Routes.js'
 import aboutUsRoutes from "./Routes/aboutUsRoute.js";
 import bodyParser from "body-parser";
 
@@ -34,6 +35,7 @@ app.use("/api/user", UserRouter);
 app.use("/api/form", FormRouter);
 app.use("/api/category", CategoryRouter);
 app.use("/api/product", productRouters);
+app.use("/api/review",ReviewRouter)
 app.use("/uploads", express.static("./uploads"));
 
 app.listen(

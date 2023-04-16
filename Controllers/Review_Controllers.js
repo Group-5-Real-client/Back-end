@@ -43,22 +43,41 @@ export const getAll = async (req, res, next) => {
 //     return next(err);
 //   }
 // };
-
-        
-// ==== 2nd add Rating function =====  //
+//==============================
+// Controller function to create a new rating
 export const addRating = async (req, res, next) => {
-  const rating = new Model({
-    rating: req.body.rating,
-    message: req.body.message,
-  });
+  const { rating, message } = req.body;
+  const { user_id, product_id } = req.params; // Get user ID and product ID from request params
 
   try {
-    await rating.save();
-    res.status(200).send({ success: true });
+    const newRating = new Model({ rating, message, user_id, product_id });
+    await newRating.save();
+
+    res.status(201).json({ rating: newRating });
   } catch (err) {
+    console.error('Error creating rating:', err);
     return next(err);
   }
 };
+
+//===============================
+        
+// ==== 2nd add Rating function =====  //
+// export const addRating = async (req, res, next) => {
+//   const rating = new Model({
+//     rating: req.body.rating,
+//     message: req.body.message,
+//     // product_id: product_id,
+//     // user_id: user_id
+//   });
+
+//   try {
+//     await rating.save();
+//     res.status(200).send({ success: true });
+//   } catch (err) {
+//     return next(err);
+//   }
+// };
 
 
 

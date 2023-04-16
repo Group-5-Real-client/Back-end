@@ -32,11 +32,17 @@ const reviewSchema = new Schema(
     }
 );
 
-    reviewSchema.pre(["find", "findOne", "save", "create"], function () {
+    // reviewSchema.pre(["find", "findOne", "save", "create"], function () {
+    //     this.populate(["user_id" , "product_id"]);
+    // });
 
-        this.populate(["user_id" , "product_id"]);
-
-    });
+    reviewSchema.pre(["find", "findOne", "save", "create"], function (next) {
+        // Use the `populate` method to populate the `user_id` field with the related `User` model
+        this.populate('user_id');
+        // Use the `populate` method to populate the `product_id` field with the related `Product` model
+        this.populate('product_id');
+        next();
+      });
 
     const Review = model('Review', reviewSchema);
     export default Review;
