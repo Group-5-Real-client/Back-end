@@ -1,12 +1,17 @@
 import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
-const aboutUsSchema = new Schema(
+const categorySchema = new Schema(
     {
+        name: {
+            type: String,
+            required: true,
+        },
         description: {
             type: String,
             required: true,
         },
+
         image: {
             type: String,
             required: true,
@@ -16,11 +21,12 @@ const aboutUsSchema = new Schema(
             required: true,
         },
     },
+
     {
-        collection: "aboutUs",
+        collection: "categories",
         timestamps: true,
     }
 );
 
-const AboutUs = model("AboutUs", aboutUsSchema);
-export default AboutUs;
+const Category = model("Category", categorySchema);
+export default Category;

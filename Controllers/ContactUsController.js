@@ -1,4 +1,4 @@
-import Model from "../Models/ContactUs_Model.js";
+import Model from "../Models/ContactUsModel.js";
 
 const handleErrors = (err) => {
   console.log(err.message);

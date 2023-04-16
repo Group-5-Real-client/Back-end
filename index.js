@@ -2,12 +2,12 @@ import express from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import connectDB from "./db.js";
-import AdminRouter from "./Routes/Admin_Routes.js";
-import UserRouter from "./Routes/User_Routes.js";
-import CategoryRouter from "./Routes/Categories_Routes.js";
-import FormRouter from "./Routes/ContactUs_Routes.js";
+import AdminRouter from "./Routes/AdminRoute.js";
+import UserRouter from "./Routes/UserRoute.js";
+import CategoryRouter from "./Routes/CategoryRoute.js";
+import FormRouter from "./Routes/ContactUsRoute.js";
 import productRouters from "./Routes/product.js";
-import ReviewRouter from './Routes/Review_Routes.js'
+import ReviewRouter from './Routes/ReviewRoute.js'
 import aboutUsRoutes from "./Routes/aboutUsRoute.js";
 import bodyParser from "body-parser";
 

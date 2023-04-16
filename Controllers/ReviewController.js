@@ -1,4 +1,4 @@
-import Model from '../Models/Review_Model.js';
+import Model from '../Models/ReviewModel.js';
 
 // Controller function to get a rating by ID
 

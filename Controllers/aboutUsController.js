@@ -8,7 +8,7 @@ const getAllAboutUs = async (req, res) => {
         res.json(aboutUs);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ message: "Server Error" });
+        res.status(500).json({ status: 500, err: err.message });
     }
 };
 
@@ -22,7 +22,7 @@ const getAboutUsById = async (req, res) => {
         res.json(aboutUs);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ message: "Server Error" });
+        res.status(500).json({ status: 500, err: err.message });
     }
 };
 
@@ -33,6 +33,7 @@ const addAboutUs = async (req, res) => {
         const newPoster = new AboutUs({
             image: req.body.image,
             description: req.body.description,
+            adminUsername: req.admin.username,
         });
         await newPoster.save().then((response) => {
             if (response) {
@@ -44,7 +45,7 @@ const addAboutUs = async (req, res) => {
             }
         });
     } catch (err) {
-        return res.status(403).send({ status: 403, err: err.message });
+        return res.status(500).send({ status: 500, err: err.message });
     }
 };
 
@@ -56,16 +57,20 @@ const editAboutUs = async (req, res) => {
         if (!aboutUs) {
             return res.status(404).json({ message: "About Us not found" });
         }
+        if (aboutUs.image) {
+            fs.unlinkSync(`${aboutUs.image}`);
+        }
         aboutUs.description = description;
         aboutUs.image = image;
         await aboutUs.save();
         res.json(aboutUs);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ message: "Server Error" });
+        res.status(500).json({ status: 500, err: err.message });
     }
 };
 
+// DELETE aboutUs
 const deleteAboutUs = async (req, res) => {
     try {
         const aboutUs = await AboutUs.findByIdAndDelete(req.params.id);
@@ -79,7 +84,7 @@ const deleteAboutUs = async (req, res) => {
         res.json({ message: "About Us deleted successfully" });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ message: "Server Error" });
+        res.status(500).json({ status: 500, err: err.message });
     }
 };
 
