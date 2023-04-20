@@ -9,6 +9,7 @@ import FormRouter from "./Routes/ContactUsRoute.js";
 import productRouters from "./Routes/productRoute.js";
 import ReviewRouter from "./Routes/ReviewRoute.js";
 import aboutUsRoutes from "./Routes/aboutUsRoute.js";
+import orderRouter from "./Routes/orderRoute.js";
 import bodyParser from "body-parser";
 
 dotenv.config();
@@ -36,6 +37,7 @@ app.use("/api/form", FormRouter);
 app.use("/api/category", CategoryRouter);
 app.use("/api/product", productRouters);
 app.use("/api/review", ReviewRouter);
+app.use("/api/order", orderRouter);
 app.use("/uploads", express.static("./uploads"));
 
 app.listen(

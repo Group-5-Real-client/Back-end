@@ -1,79 +1,90 @@
-// import orderModel from "../Models/order.js";
+import Order from "../Models/orderModel.js";
 
-// export const getAllOrders = async (req, res) => {
-//   try {
-//     const page = parseInt(req.query.page) || 1;
-//     const limit = parseInt(req.query.limit) || 10;
+// Get all orders
+const getAllOrders = async (req, res) => {
+    try {
+        const orders = await Order.find().populate("Product").populate("User");
+        res.json(orders);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 
-//     const startIndex = (page - 1) * limit;
-//     const endIndex = page * limit;
+// Get order by ID
+const getOrderById = async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id)
+            .populate("Product")
+            .populate("User");
+        if (!order) {
+            return res.status(404).json({ message: "Order not found" });
+        }
+        res.json(order);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 
-//     const allOrders = await orderModel.find()
-//       .populate('product')
-//       .populate('user_id')
-//       .skip(startIndex)
-//       .limit(limit);
-//     const totalCount = await orderModel.countDocuments();
+// Add a new order
+const addOrder = async (req, res) => {
+    const { totalprice, Product, User, date, status, address } = req.body;
+    const newOrder = new Order({
+        totalprice,
+        Product,
+        User,
+        date,
+        status,
+        address,
+    });
 
-//     const pagination = {};
-//     if (endIndex < totalCount) {
-//       pagination.next = {
-//         page: page + 1,
-//         limit: limit
-//       };
-//     }
-//     if (startIndex > 0) {
-//       pagination.prev = {
-//         page: page - 1,
-//         limit: limit
-//       };
-//     }
+    try {
+        const savedOrder = await newOrder.save();
+        res.status(201).json(savedOrder);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
 
-//     res.status(200).json({ message: allOrders, pagination });
-//   } catch (err) {
-//     res.json({ error: err.message });
-//   }
-// };
+// Edit an order
+const editOrder = async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id);
+        if (!order) {
+            return res.status(404).json({ message: "Order not found" });
+        }
+        const { totalprice, Product, User, date, status, address } = req.body;
+        if (totalprice) order.totalprice = totalprice;
+        if (Product) order.Product = Product;
+        if (User) order.User = User;
+        if (date) order.date = date;
+        if (status) order.status = status;
+        if (address) order.address = address;
+        const savedOrder = await order.save();
+        res.json(savedOrder);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
 
-// export const getOrderById = async (req, res) => {
-//   try {
-//     const order = await orderModel.findById(req.params.id)
-//       .populate('product')
-//       .populate('user_id');
-//     res.status(200).json({ message: order });
-//   } catch (error) {
-//     res.json({ error: error.message });
-//   }
-// };
+// Delete an order
+const deleteOrder = async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id);
+        if (!order) {
+            return res.status(404).json({ message: "Order not found" });
+        }
+        await order.deleteOne();
+        res.json({ message: "Order deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 
-// export const addOrder = async (req, res, next) => {
-//   try {
-//     const newOrder = new orderModel(req.body);
-//     await newOrder.save();
-//     res.status(200).json("Order has been added successfully");
-//   } catch (err) {
-//     next(err);
-//   }
-// };
-
-// export const editOrder = async (req, res) => {
-//   try {
-//     const updateOrder = await orderModel.findByIdAndUpdate(
-//       req.params.id,
-//       { $set: req.body },
-//       { new: true }
-//     );
-//     res.status(200).json(updateOrder);
-//   } catch (error) {
-//     res.json({ error: error.message });
-//   }
-// };
-
-// export const deleteOrder = async (req, res) => {
-//   try {
-//     await orderModel.findByIdAndDelete(req.params.id);
-//     res.status(200).json("Order deleted successfully");
-//   } catch (error) {
-//     res.json({ error: error.message });
-//   }
-// };
+const orderController = {
+    getAllOrders,
+    getOrderById,
+    addOrder,
+    editOrder,
+    deleteOrder,
+};
+export default orderController;

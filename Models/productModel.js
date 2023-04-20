@@ -38,6 +38,6 @@ const productSchema = Schema(
 productSchema.pre(["find", "findOne"], function () {
     this.populate(["category"]);
 });
-const Model = model("product", productSchema);
+const Model = model("Product", productSchema);
 
 export default Model;
