@@ -29,7 +29,6 @@ const getAboutUsById = async (req, res) => {
 // ADD aboutUs
 const addAboutUs = async (req, res) => {
     try {
-        console.log(req.body);
         const newPoster = new AboutUs({
             image: req.body.image,
             description: req.body.description,

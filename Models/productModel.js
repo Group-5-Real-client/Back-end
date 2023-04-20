@@ -23,7 +23,12 @@ const productSchema = Schema(
         ],
         image: {
             type: String,
+            required: true,
         },
+        // adminUsername: {
+        //     type: String,
+        //     required: true,
+        // },
     },
     {
         collection: "Products",
