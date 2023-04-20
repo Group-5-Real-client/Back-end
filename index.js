@@ -6,8 +6,8 @@ import AdminRouter from "./Routes/AdminRoute.js";
 import UserRouter from "./Routes/UserRoute.js";
 import CategoryRouter from "./Routes/CategoryRoute.js";
 import FormRouter from "./Routes/ContactUsRoute.js";
-import productRouters from "./Routes/product.js";
-import ReviewRouter from './Routes/ReviewRoute.js'
+import productRouters from "./Routes/productRoute.js";
+import ReviewRouter from "./Routes/ReviewRoute.js";
 import aboutUsRoutes from "./Routes/aboutUsRoute.js";
 import bodyParser from "body-parser";
 
@@ -35,7 +35,7 @@ app.use("/api/user", UserRouter);
 app.use("/api/form", FormRouter);
 app.use("/api/category", CategoryRouter);
 app.use("/api/product", productRouters);
-app.use("/api/review",ReviewRouter)
+app.use("/api/review", ReviewRouter);
 app.use("/uploads", express.static("./uploads"));
 
 app.listen(
