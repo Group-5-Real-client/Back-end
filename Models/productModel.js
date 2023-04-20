@@ -15,7 +15,7 @@ const productSchema = Schema(
             type: Number,
             required: true,
         },
-        category: [
+        Category: [
             {
                 type: Schema.Types.ObjectId,
                 ref: "Category",
@@ -36,7 +36,7 @@ const productSchema = Schema(
     }
 );
 productSchema.pre(["find", "findOne"], function () {
-    this.populate(["category"]);
+    this.populate(["Category"]);
 });
 const Model = model("Product", productSchema);
 
