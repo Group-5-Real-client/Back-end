@@ -29,7 +29,7 @@ export const addProduct = async (req, res) => {
             description: req.body.description,
             price: req.body.price,
             name: req.body.name,
-            // adminUsername: req.admin.username,
+            adminUsername: req.admin.username,
         });
         await newProduct.save();
         res.status(201).json(newProduct);

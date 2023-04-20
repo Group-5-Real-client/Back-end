@@ -25,10 +25,10 @@ const productSchema = Schema(
             type: String,
             required: true,
         },
-        // adminUsername: {
-        //     type: String,
-        //     required: true,
-        // },
+        adminUsername: {
+            type: String,
+            required: true,
+        },
     },
     {
         collection: "Products",
