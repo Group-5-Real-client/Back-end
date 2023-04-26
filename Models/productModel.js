@@ -15,12 +15,10 @@ const productSchema = Schema(
             type: Number,
             required: true,
         },
-        Category: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "Category",
-            },
-        ],
+        Category: {
+            type: Schema.Types.ObjectId,
+            ref: "Category",
+        },
         image: {
             type: String,
             required: true,
@@ -36,7 +34,7 @@ const productSchema = Schema(
     }
 );
 productSchema.pre(["find", "findOne"], function () {
-    this.populate(["Category"]);
+    this.populate("Category");
 });
 const Model = model("Product", productSchema);
 

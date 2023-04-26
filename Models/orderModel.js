@@ -12,12 +12,11 @@ const orderSchema = Schema(
                 ref: "Product",
             },
         ],
-        User: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "User",
-            },
-        ],
+        User: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+        },
+
         date: {
             type: Date,
             required: true,
@@ -40,7 +39,9 @@ const orderSchema = Schema(
 );
 
 orderSchema.pre(["find", "findOne"], function () {
-    this.populate(["Product", "User"]);
+    this.populate({ path: "User", select: "username phone Address" }).populate(
+        "Product"
+    );
 });
 
 const Model = model("order", orderSchema);

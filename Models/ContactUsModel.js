@@ -22,12 +22,10 @@ const formSchema = new Schema(
             required: true,
         },
 
-        User: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "User",
-            },
-        ],
+        User: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+        },
     },
     {
         collection: "forms",
@@ -35,7 +33,7 @@ const formSchema = new Schema(
     }
 );
 formSchema.pre(["find", "findone"], function () {
-    this.populate(["User"]);
+    this.populate("User");
 });
 
 const form = model("form", formSchema);

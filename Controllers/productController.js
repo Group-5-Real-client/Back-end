@@ -3,7 +3,7 @@ import fs from "fs";
 
 export const getAllProducts = async (req, res) => {
     try {
-        const products = await productController.find().populate("Category");
+        const products = await productController.find();
         res.status(200).json(products);
     } catch (error) {
         res.status(404).json({ status: 404, message: error.message });
@@ -13,9 +13,7 @@ export const getAllProducts = async (req, res) => {
 export const getProductById = async (req, res) => {
     const { id } = req.params;
     try {
-        const product = await productController
-            .findById(id)
-            .populate("Category");
+        const product = await productController.findById(id);
         res.status(200).json(product);
     } catch (error) {
         res.status(404).json({ status: 404, message: error.message });

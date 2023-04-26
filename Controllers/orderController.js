@@ -3,9 +3,8 @@ import Order from "../Models/orderModel.js";
 // Get all orders
 const getAllOrders = async (req, res) => {
     try {
-        const orders = await Order.find()
-            .populate("Product")
-            .populate({ path: "User", select: "username" });
+        const orders = await Order.find();
+        console.log(orders);
         res.json(orders);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -15,9 +14,7 @@ const getAllOrders = async (req, res) => {
 // Get order by ID
 const getOrderById = async (req, res) => {
     try {
-        const order = await Order.findById(req.params.id)
-            .populate("Product")
-            .populate({ path: "User", select: "username" });
+        const order = await Order.findById(req.params.id);
         if (!order) {
             return res.status(404).json({ message: "Order not found" });
         }
