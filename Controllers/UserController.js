@@ -17,7 +17,7 @@ const handleErrors = (err) => {
 
 // register user
 export const Register = async (req, res, next) => {
-    const saltRounds = 10;
+    const saltRounds = 16;
     const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
     const user = new Model({
         username: req.body.username,
@@ -33,9 +33,9 @@ export const Register = async (req, res, next) => {
             message: "user created successfully",
             user: user,
         });
-    } catch (err) {
-        const errors = handleErrors(err);
-        res.status(400).json({ errors });
+    } catch (error) {
+        const errors = handleErrors(error);
+        res.status(400).json({ message: error.message });
     }
 };
 // login  user

@@ -7,11 +7,13 @@ const UserSchema = new Schema(
         username: {
             type: String,
             required: [true, "Please enter an username"],
+            unique: true,
         },
         email: {
             type: String,
             required: [true, "Please enter an email"],
             validate: [validator.isEmail, "Please enter a valid email"],
+            unique: true,
         },
         password: {
             type: String,
