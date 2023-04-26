@@ -45,11 +45,11 @@ export const login = async (req, res, next) => {
     try {
         const user = await Model.findOne({ email });
         if (!user) {
-            return res.status(400).send("Email does not exist");
+            return res.status(400).json({ message: "Email does not exist" });
         }
         const validPass = await bcrypt.compare(password, user.password);
         if (!validPass) {
-            return res.status(400).send("Invalid password");
+            return res.status(400).json({ message: "Invalid password" });
         }
 
         // Create and send JWT token
