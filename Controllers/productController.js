@@ -62,7 +62,6 @@ export const getProductById = async (req, res) => {
                 },
             },
         ]);
-        console.log(product);
         res.status(200).json(product);
     } catch (error) {
         res.status(404).json({ status: 404, message: error.message });
