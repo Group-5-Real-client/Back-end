@@ -13,15 +13,10 @@ const formSchema = new Schema(
             type: String,
             required: true,
         },
-        Date: {
-            type: Date,
+        phone: {
+            type: Number,
             required: true,
         },
-        title: {
-            type: String,
-            required: true,
-        },
-
         User: {
             type: Schema.Types.ObjectId,
             ref: "User",

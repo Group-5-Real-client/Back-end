@@ -39,17 +39,19 @@ export const post = async (req, res, next) => {
     const form = new Model({
         email: req.body.email,
         message: req.body.message,
-        Date: req.body.Date,
-        title: req.body.title,
+        phone: req.body.phone,
         User: req.body.User,
     });
     try {
         await form.validate();
         await form.save();
-        res.status(200).json({ message: "Form sent successfully" });
-    } catch (err) {
-        const errors = handleErrors(err);
-        res.status(400).json({ errors });
+        res.status(200).json({
+            message: "Form successfully submited",
+            form: form,
+        });
+    } catch (error) {
+        const errors = handleErrors(error);
+        res.status(400).json({ message: error.message });
     }
 };
 
