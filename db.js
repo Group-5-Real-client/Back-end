@@ -8,7 +8,7 @@ const connectDB = async()=>{
             dbName:process.env.DB_NAME,
         });
         console.log(
-            `MongoDB connected:${conn.connection.host}`
+            `Connected to database`
         )
       }  catch(error){
             console.log(

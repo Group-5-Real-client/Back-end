@@ -61,8 +61,31 @@ export const getProductById = async (req, res) => {
                     preserveNullAndEmptyArrays: true,
                 },
             },
+            // {
+            //     $lookup: {
+            //         from: "users",
+            //         localField: "reviews.User",
+            //         foreignField: "_id",
+            //         as: "user",
+            //     },
+            // },
+            {
+                $project: {
+                    name: 1,
+                    description: 1,
+                    price: 1,
+                    Category: 1,
+                    image: 1,
+                    adminUsername: 1,
+                    "reviews.message": 1,
+                    "reviews.rating": 1,
+                    // "user.username": 1,
+                    "category.name": 1,
+                    "category.description": 1,
+                },
+            },
         ]);
-        res.status(200).json(product);
+        res.status(200).json(product[0]);
     } catch (error) {
         res.status(404).json({ status: 404, message: error.message });
     }
